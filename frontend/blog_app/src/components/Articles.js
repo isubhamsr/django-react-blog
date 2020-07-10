@@ -1,6 +1,7 @@
 import React from 'react'
 import { List, Avatar, Space } from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom'
 
 const IconText = ({ icon, text }) => (
     <Space>
@@ -41,7 +42,8 @@ export default function Articles(props) {
                     extra={
                         
                         <img
-                            width={272}
+                            width={250}
+                            height={150}
                             alt="logo"
                             src= {"http://127.0.0.1:8000/media/"+item.article_image}
                         />
@@ -49,10 +51,10 @@ export default function Articles(props) {
                 >
                     <List.Item.Meta
                         avatar={<Avatar src={item.avatar} />}
-                        title={<a href={item.href}>{item.article_title}</a>}
-                        description={item.article_description}
+                        title={<Link to={`/${item.article_id}`}>{item.article_title}</Link>}
+                        description={item.article_description.slice(0,50)}
                     />
-                    {item.article_description}
+                    {`${item.article_description.slice(0,670)}...`}
                 </List.Item>
             )}
         />

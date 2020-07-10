@@ -2,13 +2,16 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import './App.css'
 import LayOut from './containers/Layout';
-import ArticleListView from './containers/ArticleListView';
+import { BrowserRouter } from 'react-router-dom'
+import BaseRoute from './route';
 
 function App() {
   return (
-    <LayOut>
-      <ArticleListView />
-    </LayOut>
+    <BrowserRouter>
+      <LayOut>
+        <BaseRoute />
+      </LayOut>
+    </BrowserRouter>
   );
 }
 

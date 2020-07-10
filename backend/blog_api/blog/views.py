@@ -20,4 +20,19 @@ def allpost(request):
         errMessage = f"Oops! {sys.exc_info()[1]}"
         # print("Oops!", sys.exc_info()[1], "occurred.")
         return JsonResponse({'err':'true', 'message' : errMessage})
+
+
+def articleDetails(request, id):
+    try:
+        # print(id)
+        articleDetails = Article.objects.filter(article_id=id)
+        if len(articleDetails) == 0:
+            return JsonResponse({'err':'true', 'message':'Article Not Found'})
+        else:
+            # print(articleDetails.values())
+            details = list(articleDetails.values())
+            return JsonResponse({'err':'false', 'message':'Article Found', 'data':details})
+    except Exception as err:
+        errMessage = f"Oops! {sys.exc_info()[1]}"
+        return JsonResponse({'err':'true', 'message' : errMessage})
     
