@@ -22,7 +22,7 @@ export default function Articles(props) {
                 onChange: page => {
                     console.log(page);
                 },
-                pageSize: 3,
+                pageSize: 10,
             }}
             dataSource={props.data}
     //         footer={
@@ -51,7 +51,7 @@ export default function Articles(props) {
                 >
                     <List.Item.Meta
                         avatar={<Avatar src={item.avatar} />}
-                        title={<Link to={`/${item.article_id}`}>{item.article_title}</Link>}
+                        title={<Link to={`/post/${item.article_id}`}>{item.article_title}</Link>}
                         description={item.article_description.slice(0,50)}
                     />
                     {`${item.article_description.slice(0,670)}...`}

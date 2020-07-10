@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.serializers import serialize
+from django.views.decorators.csrf import csrf_exempt
 from blog.models import Article
+from blog.forms import ArticleForm
 import json
 import sys
 
@@ -15,6 +17,8 @@ def allpost(request):
             return JsonResponse({'err':'true', 'message':'Posts Not Found'})
         else:
             data = list(articles.values())
+            data = data[::-1] 
+            # print(data)
             return JsonResponse({'err':'false', 'message':'All Posts are Fetched', 'data':data})
     except Exception as err:
         errMessage = f"Oops! {sys.exc_info()[1]}"
@@ -36,3 +40,15 @@ def articleDetails(request, id):
         errMessage = f"Oops! {sys.exc_info()[1]}"
         return JsonResponse({'err':'true', 'message' : errMessage})
     
+@csrf_exempt    
+def addArticle(request):
+    if request.method == 'POST':
+        print(request.POST)
+        print(request.FILES)
+        form = ArticleForm(request.POST, request.FILES)
+        # print(form)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({"err":"false", "message":"data added"})
+        else:
+            return JsonResponse({"err":"true", "message":"data not added"})

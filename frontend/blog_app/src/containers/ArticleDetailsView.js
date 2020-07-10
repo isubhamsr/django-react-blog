@@ -13,11 +13,9 @@ export default class ArticleDetails extends Component {
 
     componentDidMount() {
         const articleId = this.props.match.params.articleId;
-        console.log("articleId");
-        console.log(articleId);
 
 
-        Axios.get(`http://127.0.0.1:8000/api/${articleId}/`)
+        Axios.get(`http://127.0.0.1:8000/api/post/${articleId}/`)
             .then((res) => {
                 // console.log(res.data.data);
                 const data = {}
@@ -58,7 +56,6 @@ export default class ArticleDetails extends Component {
             >
                 <Meta title={this.state.article.article_title} description={this.state.article.article_description} />
             </Card>
-            // </div>
         )}
     }
 }
