@@ -16,10 +16,46 @@ const layout = {
 export default class CustomForm extends Component {
 
     state = {
-        image: null
+        image: null,
+        article: {
+            article_title: "",
+            article_description: ""
+        }
     }
 
-    handleFormSubmit = (event) => {
+    componentDidMount() {
+
+        const articleId = this.props.articleId;
+
+        console.log("articleId");
+
+        if (articleId !== undefined) {
+            console.log(articleId);
+
+            axios.get(`http://127.0.0.1:8000/api/post/${articleId}/`)
+                .then((res) => {
+                    // console.log(res.data.data);
+                    const data = {}
+                    res.data.data.map((item) => (
+                        data.article_title = item.article_title,
+                        data.article_description = item.article_description,
+                        data.article_image = item.article_image,
+                        data.article_id = item.article_id
+                    ))
+                    // console.log("data");
+                    // console.log(data);
+
+                    this.setState({
+                        // article: res.data.data
+                        article: data
+                    })
+                })
+        }
+
+
+    }
+
+    handleFormSubmit = (event, requestType, articleId) => {
         console.log("click");
 
         event.preventDefault();
@@ -34,6 +70,11 @@ export default class CustomForm extends Component {
         form_data.append("article_description", decription);
         form_data.append("article_image", image);
 
+        if (requestType === "PUT"){
+            
+        }
+
+
         axios({
             method: 'POST',
             url: 'http://127.0.0.1:8000/api/addarticle/',
@@ -43,11 +84,14 @@ export default class CustomForm extends Component {
             cache: false,
             processData: false,
             data: form_data,
-          })
+        })
             .then(function (res) {
                 console.log(res.data);
-                
-            });
+            })
+            .catch(err => console.log(err.message)
+            )
+
+
 
     }
 
@@ -69,16 +113,16 @@ export default class CustomForm extends Component {
                         name="title"
                         label="Title"
                     >
-                        <Input name="title" ref={(title) => this.title = title} />
+                        <Input name="title" ref={(title) => this.title = title} value={this.state.article.article_title} />
                     </Form.Item>
                     <Form.Item name="decription" label="Decription">
-                        <Input.TextArea name="decription" ref={(decription) => this.decription = decription} />
+                        <Input.TextArea name="decription" ref={(decription) => this.decription = decription} value={this.state.article.article_description} />
                     </Form.Item>
-                    <Input type="file" onChange={this.onImageChange} name="image" id="image"/>Add Coder Image
+                    <Input type="file" onChange={this.onImageChange} name="image" id="image" />Add Coder Image
 
                     <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-                        <Button type="primary" htmlType="submit" onClick={this.handleFormSubmit}>
-                            Submit
+                        <Button type="primary" htmlType="submit" onClick={(event)=>this.handleFormSubmit(event,this.props.method, this.props.articleId)}>
+                            {this.props.buttonType === 'Update' ? "Update" : "Create"}
                     </Button>
                     </Form.Item>
 

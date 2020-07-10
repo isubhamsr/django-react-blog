@@ -10,6 +10,7 @@ export default function BaseRoute() {
             <Route exact path="/" component={ArticleListView} />
             <Route path="/post/:articleId" component={ArticleDetails} />
             <Route path="/create" component={CustomForm} />
+            <Route path="/post/update/:articleId" component={CustomForm} />
         </div>
     )
 }
