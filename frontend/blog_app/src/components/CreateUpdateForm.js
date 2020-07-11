@@ -70,7 +70,8 @@ export default class CustomForm extends Component {
         form_data.append("article_description", decription);
         form_data.append("article_image", image);
 
-        if (requestType === "PUT"){
+        if (requestType === "PUT") {
+            console.log(requestType);
             axios({
                 method: 'POST',
                 url: `http://127.0.0.1:8000/api/update/${articleId}/`,
@@ -87,24 +88,27 @@ export default class CustomForm extends Component {
                 })
                 .catch(err => console.log(err.message)
                 )
+        } else {
+            axios({
+                method: 'POST',
+                url: 'http://127.0.0.1:8000/api/addarticle/',
+                responseType: 'stream',
+                enctype: 'multipart/form-data',
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: form_data,
+            })
+                .then(function (res) {
+                    console.log(res.data);
+                    window.location.replace("/")
+                })
+                .catch(err => console.log(err.message)
+                )
+
         }
 
 
-        axios({
-            method: 'POST',
-            url: 'http://127.0.0.1:8000/api/addarticle/',
-            responseType: 'stream',
-            enctype: 'multipart/form-data',
-            contentType: false,
-            cache: false,
-            processData: false,
-            data: form_data,
-        })
-            .then(function (res) {
-                console.log(res.data);
-            })
-            .catch(err => console.log(err.message)
-            )
 
 
 
@@ -136,9 +140,9 @@ export default class CustomForm extends Component {
                     <Input type="file" onChange={this.onImageChange} name="image" id="image" />Add Coder Image
 
                     <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-                        <Button type="primary" htmlType="submit" onClick={(event)=>this.handleFormSubmit(event,this.props.method, this.props.articleId)}>
+                        <Button type="primary" htmlType="submit" onClick={(event) => this.handleFormSubmit(event, this.props.method, this.props.articleId)}>
                             {this.props.buttonType === 'Update' ? "Update" : "Create"}
-                    </Button>
+                        </Button>
                     </Form.Item>
 
                 </Form>

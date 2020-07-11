@@ -61,8 +61,8 @@ def update_article(request, id):
     if request.method == 'POST':
         try:
             form = ArticleForm(request.POST, request.FILES) 
-            print(form)
-            print(id)
+            # print(form)
+            # print(id)
             if form.is_valid():
                 # form.save()
                 update_article = Article.objects.get(article_id = id)
