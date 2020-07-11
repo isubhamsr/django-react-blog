@@ -71,7 +71,22 @@ export default class CustomForm extends Component {
         form_data.append("article_image", image);
 
         if (requestType === "PUT"){
-            
+            axios({
+                method: 'POST',
+                url: `http://127.0.0.1:8000/api/update/${articleId}/`,
+                responseType: 'stream',
+                enctype: 'multipart/form-data',
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: form_data,
+            })
+                .then(function (res) {
+                    console.log(res.data);
+                    window.location.reload()
+                })
+                .catch(err => console.log(err.message)
+                )
         }
 
 

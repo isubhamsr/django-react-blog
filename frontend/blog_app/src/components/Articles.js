@@ -22,7 +22,7 @@ export default function Articles(props) {
                 onChange: page => {
                     console.log(page);
                 },
-                pageSize: 10,
+                pageSize: 5,
             }}
             dataSource={props.data}
     //         footer={

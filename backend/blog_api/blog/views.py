@@ -5,6 +5,8 @@ from django.core.serializers import serialize
 from django.views.decorators.csrf import csrf_exempt
 from blog.models import Article
 from blog.forms import ArticleForm
+from django.forms.models import modelform_factory
+from functools import wraps
 import json
 import sys
 
@@ -55,22 +57,12 @@ def addArticle(request):
 
 
 @csrf_exempt
-def update_article(request, id):            
+def update_article(request, id):       
     if request.method == 'POST':
         try:
-            form = ArticleForm(request.POST, request.FILES)
+            form = ArticleForm(request.POST, request.FILES) 
             print(form)
             print(id)
-    
-            # article_update = Article.objects.get(article_id = id)
-            # print(article_update)
-            # tasks.test_title = payload['task_title']
-            # tasks.test_desc = payload['task_desc']
-            # tasks.task_time = payload['task_time']
-            # tasks.task_date = payload['task_date']
-            # tasks.raw_date_time = payload['raw_date_time']
-
-            # tasks.save() 
             if form.is_valid():
                 # form.save()
                 update_article = Article.objects.get(article_id = id)
