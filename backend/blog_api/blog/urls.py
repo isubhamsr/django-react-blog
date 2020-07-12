@@ -7,4 +7,6 @@ urlpatterns = [
     path('addarticle/', views.addArticle, name='addarticle'),
     path('update/<int:id>/', views.update_article, name='update'),
     path('post/<int:id>/', views.articleDetails, name='articleDetails'),
+    path('signup/', views.signup, name='signup'),
+    path('signin/', views.signin, name='signin'),
 ]
