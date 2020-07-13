@@ -87,7 +87,7 @@ def signin(request):
                     payload = {"first_name":first_name, "last_name":last_name, "email":email, "phone":phone, "username":username}
                     encoded_jwt = jwt.encode(payload, 'secret', algorithm='HS256')
                     data = encoded_jwt.decode('utf-8')
-                    return JsonResponse({'err':'true', 'message' : 'User Exists and password matched', 'data':data})
+                    return JsonResponse({'err':'false', 'message' : 'User Exists and password matched', 'data':data})
                 else:
                     return JsonResponse({'err':'true', 'message' : 'Wrong Password'})
         except Exception as err:

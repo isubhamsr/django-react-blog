@@ -10,11 +10,11 @@ export default function BaseRoute() {
     return (
         <div>
             <Route exact path="/" component={ArticleListView} />
-            <Route path="/post/:articleId" component={ArticleDetails} />
-            <Route path="/create" component={CustomForm} />
-            <Route path="/post/update/:articleId" component={CustomForm} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/signin" component={Signin} />
+            <Route path="/post/:articleId/" component={ArticleDetails} />
+            <Route path="/create/" component={CustomForm} />
+            <Route path="/post/update/:articleId/" component={CustomForm} />
+            <Route path="/signup/" component={Signup} />
+            <Route path="/signin/" component={Signin} />
         </div>
     )
 }
