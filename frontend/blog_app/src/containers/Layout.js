@@ -31,7 +31,7 @@ class CustomLayout extends Component {
                         this.props.idAuthenticated ?
                         <Menu.Item key="2" onClick={this.handleLogout}>Log Out</Menu.Item>
                         :
-                        <Menu.Item key="2"><Link to="/signin">Sign In</Link></Menu.Item>
+                        <Menu.Item key="2"><Link to="/signin">SignIn</Link></Menu.Item>
                     }
                 </Menu>
             </Header>
