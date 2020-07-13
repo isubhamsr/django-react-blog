@@ -2,24 +2,62 @@ import React, { Component } from 'react'
 import {
     Form,
     Input,
-    Tooltip,
-    Cascader,
-    Select,
-    Row,
-    Col,
-    Checkbox,
     Button,
-    AutoComplete,
-  } from 'antd';
-  import { QuestionCircleOutlined } from '@ant-design/icons';
-  
+    Spin
+} from 'antd';
+import { LoadingOutlined, UserOutlined, LockOutlined } from '@ant-design/icons';
+import { Redirect } from 'react-router-dom'
+import * as actions from '../store/actions/Auth'
+import { connect } from 'react-redux'
+
 // const { Option } = Select;
 // const AutoCompleteOption = AutoComplete.Option;
 
-export default class Signin extends Component {
+class Singnup extends Component {
+
+    state = {
+        redirect : false
+    }
+
+    componentDidMount(){
+        const token = localStorage.getItem('token');
+
+        if (token !== null){
+            this.setState({ redirect: true })
+        }
+    }
+
+    handleSignup = () =>{
+        const first_name = this.first_name.props.value
+        const last_name = this.last_name.props.value
+        const username = this.username.props.value
+        const email = this.email.props.value
+        const password = this.password1.props.value
+        const phone = this.phone.props.value
+
+        console.log(first_name, last_name, username, email, password, phone);
+        this.props.onSignup(first_name, last_name, email, username, password, phone)
+        this.props.history.push("/")
+    }
+
     render() {
+
+        const { redirect } = this.state
+
+        if (redirect) {
+            return <Redirect to="/" />
+        }
+
+        let errMessage = null
+        if (this.props.error){
+            errMessage = (
+                <p>{this.props.error}</p>
+            )
+        }
+        console.log(this.props.error);
         return (
             <div>
+            {errMessage}
                 <Form
                     // form={form}
                     name="register"
@@ -30,6 +68,42 @@ export default class Signin extends Component {
                     }}
                     scrollToFirstError
                 >
+                    <Form.Item
+                        name="First Name"
+                        label={
+                            <span>
+                                First Name&nbsp;
+                            </span>
+                        }
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your nickname!',
+                                whitespace: true,
+                            },
+                        ]}
+                    >
+                        <Input name="first_name" ref={(first_name) => { this.first_name = first_name }}/>
+                    </Form.Item>
+
+                    <Form.Item
+                        name="Last Name"
+                        label={
+                            <span>
+                                Last Name&nbsp;
+                            </span>
+                        }
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your nickname!',
+                                whitespace: true,
+                            },
+                        ]}
+                    >
+                        <Input name="last_name" ref={(last_name) => { this.last_name = last_name }}/>
+                    </Form.Item>
+
                     <Form.Item
                         name="email"
                         label="E-mail"
@@ -44,7 +118,7 @@ export default class Signin extends Component {
                             },
                         ]}
                     >
-                        <Input />
+                        <Input name="email" ref={(email) => { this.email = email }}/>
                     </Form.Item>
 
                     <Form.Item
@@ -58,7 +132,9 @@ export default class Signin extends Component {
                         ]}
                         hasFeedback
                     >
-                        <Input.Password />
+                        <Input.Password 
+                        prefix={<LockOutlined className="site-form-item-icon" />}
+                        name="password1" ref={(password1) => { this.password1 = password1 }}/>
                     </Form.Item>
 
                     <Form.Item
@@ -82,17 +158,16 @@ export default class Signin extends Component {
                             }),
                         ]}
                     >
-                        <Input.Password />
+                        <Input.Password 
+                        prefix={<LockOutlined className="site-form-item-icon" />}
+                        name="password2" ref={(password2) => { this.password1 = password2 }}/>
                     </Form.Item>
 
                     <Form.Item
-                        name="nickname"
+                        name="username"
                         label={
                             <span>
-                                Nickname&nbsp;
-            <Tooltip title="What do you want others to call you?">
-                                    <QuestionCircleOutlined />
-                                </Tooltip>
+                                Username&nbsp;
                             </span>
                         }
                         rules={[
@@ -103,21 +178,7 @@ export default class Signin extends Component {
                             },
                         ]}
                     >
-                        <Input />
-                    </Form.Item>
-
-                    <Form.Item
-                        name="residence"
-                        label="Habitual Residence"
-                        rules={[
-                            {
-                                type: 'array',
-                                required: true,
-                                message: 'Please select your habitual residence!',
-                            },
-                        ]}
-                    >
-                        {/* <Cascader options={residences} /> */}
+                        <Input prefix={<UserOutlined className="site-form-item-icon" />} name="username" ref={(username) => { this.username = username }}/>
                     </Form.Item>
 
                     <Form.Item
@@ -135,69 +196,38 @@ export default class Signin extends Component {
                             style={{
                                 width: '100%',
                             }}
+                            name="phone" ref={(phone) => { this.phone = phone }}
                         />
                     </Form.Item>
 
-                    <Form.Item
-                        name="website"
-                        label="Website"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input website!',
-                            },
-                        ]}
-                    >
-                        {/* <AutoComplete options={websiteOptions} onChange={onWebsiteChange} placeholder="website"> */}
-                        <AutoComplete placeholder="website">
-                            <Input />
-                        </AutoComplete>
-                    </Form.Item>
-
-                    <Form.Item label="Captcha" extra="We must make sure that your are a human.">
-                        <Row gutter={8}>
-                            <Col span={12}>
-                                <Form.Item
-                                    name="captcha"
-                                    noStyle
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please input the captcha you got!',
-                                        },
-                                    ]}
-                                >
-                                    <Input />
-                                </Form.Item>
-                            </Col>
-                            <Col span={12}>
-                                <Button>Get captcha</Button>
-                            </Col>
-                        </Row>
-                    </Form.Item>
-
-                    <Form.Item
-                        name="agreement"
-                        valuePropName="checked"
-                        rules={[
-                            {
-                                validator: (_, value) =>
-                                    value ? Promise.resolve() : Promise.reject('Should accept agreement'),
-                            },
-                        ]}
-                        // {...tailFormItemLayout}
-                    >
-                        <Checkbox>
-                            I have read the <a href="">agreement</a>
-                        </Checkbox>
-                    </Form.Item>
                     <Form.Item >
-                        <Button type="primary" htmlType="submit">
+                    {
+                        this.props.loading ?
+                        <LoadingOutlined style={{ fontSize: 24 }} spin />
+                        :
+                        <Button type="primary" htmlType="submit" onClick={this.handleSignup}>
                             Register
                         </Button>
+                    }
+                        
                     </Form.Item>
                 </Form>
             </div>
         )
     }
 }
+
+const mapStateToProps = (state)=>{
+    return{
+        error : state.error,
+        loading : state.loading
+    }
+}
+
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        onSignup : (first_name, last_name, email, username, password, phone)=>{dispatch(actions.authSignup(first_name, last_name, email, username, password, phone))}
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Singnup)

@@ -1,11 +1,23 @@
 import React, { Component } from 'react'
 import { Form, Input, Button, Checkbox, Spin, Space } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { UserOutlined, LockOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Link, NavLink, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as actions from '../store/actions/Auth'
 
-class Signup extends Component {
+class Signin extends Component {
+
+    state = {
+        redirect : false
+    }
+
+    componentDidMount(){
+        const token = localStorage.getItem('token');
+
+        if (token !== null){
+            this.setState({ redirect: true })
+        }
+    }
 
     state = {
         redirect: false
@@ -16,7 +28,7 @@ class Signup extends Component {
         const password = this.password.props.value
 
         this.props.onAuth(username,password)
-        // this.props.history.push("/")
+        this.props.history.push("/")
         // this.setState({ redirect: true })
         // return( <Redirect to="/" />)
         // console.log(username, password);
@@ -24,6 +36,13 @@ class Signup extends Component {
     }
 
     render() {
+
+        const { redirect } = this.state
+
+        if (redirect) {
+            return <Redirect to="/" />
+        }
+
         let errMessage = null
         if (this.props.error){
             errMessage = (
@@ -36,11 +55,13 @@ class Signup extends Component {
             <div>
             {errMessage}
                 <Form
-                    name="normal_login"
+                    name="register"
                     className="login-form"
                     initialValues={{
-                        remember: true,
+                        residence: ['zhejiang', 'hangzhou', 'xihu'],
+                        prefix: '86',
                     }}
+                    scrollToFirstError
                     // onFinish={onFinish}
                 >
                     <Form.Item
@@ -62,13 +83,15 @@ class Signup extends Component {
                                 message: 'Please input your Password!',
                             },
                         ]}
+                        hasFeedback
                     >
-                        <Input
+                        <Input.Password 
                             prefix={<LockOutlined className="site-form-item-icon" />}
                             type="password"
                             placeholder="Password"
                             ref={(password) => { this.password = password }}
                         />
+                        {/* <Input.Password /> */}
                     </Form.Item>
                     <Form.Item>
                         <Form.Item name="remember" valuePropName="checked" noStyle>
@@ -83,9 +106,7 @@ class Signup extends Component {
                     <Form.Item>
                         {
                             this.props.loading ?
-                            <div className="example">
-                                <Spin size="large"/>
-                             </div>
+                            <LoadingOutlined style={{ fontSize: 24 }} spin />
                              :
                              <>
                              <Button type="primary" htmlType="submit" className="login-form-button" onClick={this.handleSignin}>
@@ -115,4 +136,4 @@ const mapDispatchToProps = (dispatch) =>{
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup)
+export default connect(mapStateToProps, mapDispatchToProps)(Signin)
