@@ -38,7 +38,7 @@ export const authLogin = (username, password) => {
             password: password
         })
             .then(res => {
-                
+
                 if (res.data.err === 'true') {
                     // console.log(res.data.message);
                     // alert(res.data.message)
@@ -73,15 +73,22 @@ export const authSignup = (first_name, last_name, email, username, password, pho
             password: password
         })
             .then(res => {
-                const token = res.data.data
-                const expTime = new Date(new Date().getTime() + 3600 * 1000)
-                localStorage.setItem('token', token)
-                localStorage.setItem('expDate', expTime)
-                dispatch(authSuccess(token))
-                dispatch(checkExpTime(3600))
+                if (res.data.err === 'true') {
+                    // console.log(res.data.message);
+                    // alert(res.data.message)
+                    dispatch(authFail(res.data.message))
+                } else {
+                    const token = res.data.data
+                    const expTime = new Date(new Date().getTime() + 3600 * 1000)
+                    localStorage.setItem('token', token)
+                    localStorage.setItem('expDate', expTime)
+                    dispatch(authSuccess(token))
+                    dispatch(checkExpTime(3600))
+                }
+
             })
-            .catch(err => {
-                dispatch(authFail(err))
+            .catch(error => {
+                dispatch(authFail(error.message))
             })
     }
 }
@@ -95,19 +102,32 @@ export const authLogout = () => {
     }
 }
 
+// export const authCheckState = () => {
+//     return dispatch => {
+//         const token = localStorage.getItem('token');
+//         if (token === undefined) {
+//             dispatch(authLogout());
+//         } else {
+//             const expTime = new Date(localStorage.getItem('expTime'));
+//             if (expTime <= new Date()) {
+//                 dispatch(authLogout());
+//             } else {
+//                 dispatch(authSuccess(token));
+//                 dispatch(checkExpTime((expTime.getTime() - new Date().getTime()) / 1000));
+//             }
+//         }
+//     }
+// }
+
 export const authCheckState = () => {
     return dispatch => {
         const token = localStorage.getItem('token');
-        if (token === undefined) {
+        console.log("token");
+        console.log(token);
+        if (token === null) {
             dispatch(authLogout());
         } else {
-            const expTime = new Date(localStorage.getItem('expTime'));
-            if (expTime <= new Date()) {
-                dispatch(authLogout());
-            } else {
-                dispatch(authSuccess(token));
-                dispatch(checkExpTime((expTime.getTime() - new Date().getTime()) / 1000));
-            }
+            dispatch(authSuccess(token));
         }
     }
 }
