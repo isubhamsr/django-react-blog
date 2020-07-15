@@ -27,10 +27,10 @@ def allpost(request):
         return JsonResponse({'err':'true', 'message' : errMessage})
 
 
-def articleDetails(request, id):
+def articleDetails(request, slug):
     try:
         # print(id)
-        articleDetails = Article.objects.filter(article_id=id)
+        articleDetails = Article.objects.filter(slug=slug)
         if len(articleDetails) == 0:
             return JsonResponse({'err':'true', 'message':'Article Not Found'})
         else:

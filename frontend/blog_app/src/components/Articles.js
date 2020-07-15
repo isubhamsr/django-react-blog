@@ -63,6 +63,7 @@
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 
 export default class Articles extends Component {
 
@@ -72,13 +73,15 @@ export default class Articles extends Component {
           {this.props.data.map((item)=>(
             <>
             {/* <div class="post-preview my-4"> */}
-          <Link to={`/post/${item.article_id}`}>
+          {/* <Link to={`/post/${item.article_id}`}> */}
+          <Link to={`/post/${item.slug}`}>
           <img src={"http://127.0.0.1:8000/media/" + item.article_image} class="rounded float-left mx-3" alt="ok" width={250} height={130} />
             <h2 class="post-title">
             {item.article_title}
             </h2>
             <p class="post-subtitle" style={{color: "gray"}}>
-              {`${item.article_description.slice(0, 250)}...`}
+              {`${item.short_description.slice(0, 250)}...`}
+            
             </p>
           </Link>
           <p class="post-meta">Posted by

@@ -21,7 +21,7 @@ class CustomLayout extends Component {
 
     render() {
         return (
-            <body class="d-flex flex-column h-100">
+            <body class="d-flex flex-column">
 
                 <header>
                     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -57,7 +57,7 @@ class CustomLayout extends Component {
                     </nav>
                 </header>
 
-                <main class="flex-shrink-0">
+                <main class="flex-shrink-0 ">
                     <div class="container">
                         {this.props.children}
                     </div>
@@ -87,14 +87,6 @@ const mapDispatchToProps = (dispatch) => {
         onLogout: () => { dispatch(actions.authLogout()) }
     }
 }
-
-
-
-
-
-
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomLayout)
 
