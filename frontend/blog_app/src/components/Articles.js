@@ -68,27 +68,27 @@ export default class Articles extends Component {
 
     render() {
         return (
-          <>
+          <div class="post-preview my-4">
           {this.props.data.map((item)=>(
             <>
-            <div class="post-preview my-3">
+            {/* <div class="post-preview my-4"> */}
           <Link to={`/post/${item.article_id}`}>
           <img src={"http://127.0.0.1:8000/media/" + item.article_image} class="rounded float-left mx-3" alt="ok" width={250} height={130} />
             <h2 class="post-title">
             {item.article_title}
             </h2>
-            <p class="post-subtitle">
-              {`${item.article_description.slice(0, 380)}...`}
+            <p class="post-subtitle" style={{color: "gray"}}>
+              {`${item.article_description.slice(0, 250)}...`}
             </p>
           </Link>
           <p class="post-meta">Posted by
-            <a href="#" target="_blank"> Start Bootstrap </a>
+            <a href="#" target="_blank"> Subham </a>
             on September 24, 2019</p>
-        </div>
-        <hr/>
+        {/* </div> */}
+        <hr class="my-4"/>
         </>
           ))}
-            </>
+            </div>
           
         )
     }

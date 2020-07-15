@@ -50,7 +50,7 @@ class Signin extends Component {
             )
             // console.log(errMessage);
         }
-        console.log(this.props.error);
+        // console.log(this.props.error);
         return (
             <div>
             {errMessage}

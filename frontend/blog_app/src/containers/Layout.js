@@ -33,13 +33,13 @@ class CustomLayout extends Component {
                             <div class="collapse navbar-collapse" id="navbarCollapse">
                                 <ul class="navbar-nav mr-auto mb-2 mb-md-0">
                                     <li class="nav-item active">
-                                        <Link class="nav-link" aria-current="page" to="#">Home</Link>
+                                        <Link class="nav-link" aria-current="page" to="/">Home</Link>
                                     </li>
                                     <li class="nav-item">
                                         <Link class="nav-link" to="#">Link</Link>
                                     </li>
                                     <li class="nav-item">
-                                        <Link class="nav-link disabled" to="#" tabindex="-1" aria-disabled="true">Disabled</Link>
+                                        <Link class="nav-link " to="#" tabindex="-1" >Disabled</Link>
                                     </li>
                                 </ul>
                                 <form class="d-flex">
@@ -63,7 +63,7 @@ class CustomLayout extends Component {
                     </div>
                 </main>
 
-                <footer class="footer mt-auto py-3 bg-light">
+                <footer class="footer mt-auto py-3 bg-dark fixed-bottom">
                     <div class="container">
                         <span class="text-muted">Place sticky footer content here.</span>
                     </div>
