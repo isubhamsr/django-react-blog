@@ -72,3 +72,38 @@
 #components-form-demo-normal-login .login-form-button {
   width: 100%;
 }
+
+/* layout css */
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+
+main > .container {
+  padding: 80px 15px 0;
+}
+
+/* article list and article view css */
+
+body{
+  font-size:20px;color:#212529;font-family:Lora,'Times New Roman',serif
+}
+
+.post-preview>a{color:#212529}
+.post-preview>a:focus,.post-preview>a:hover{text-decoration:none;color:#0085a1}
+
+.post-title{font-size:25px;margin-top:30px;margin-bottom:10px}
+.post-subtitle{margin:0 0 10px; font-size:20px;color:#57595c}
+
+.post-preview>.post-meta{font-size:18px;font-style:italic;margin-top:0;color:#868e96}
+
+.post-preview>.post-meta>a{text-decoration:none;color:#212529}
+.post-preview>.post-meta>a:focus,
+.post-preview>.post-meta>a:hover{text-decoration:underline;color:#0085a1}
+@media only screen and (min-width:768px){.post-preview>a>.post-title{font-size:36px}}
