@@ -35,7 +35,14 @@ export default class ArticleListView extends Component {
     render() {
         return (
             <>
+            {this.state.articles ?
+            
             <Articles data={this.state.articles}/>
+            :
+            <div>
+                <h1>No Posts Found</h1>
+            </div>
+            }
             </>
         )
     }

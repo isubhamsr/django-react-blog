@@ -63,7 +63,7 @@ class CustomLayout extends Component {
                     </div>
                 </main>
 
-                <footer class="footer mt-auto py-3 bg-dark fixed-bottom">
+                <footer class="footer">
                     <div class="container">
                         <span class="text-muted">Place sticky footer content here.</span>
                     </div>

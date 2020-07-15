@@ -7,6 +7,8 @@ class Article(models.Model):
     article_title = models.CharField(max_length=255)
     article_description = models.TextField()
     article_image = models.ImageField(upload_to='blog/images')
+    slug = models.CharField(max_length=100, default='')
+    author = models.CharField(max_length=255, default='Subham')
     is_active = models.BooleanField(default=1)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
