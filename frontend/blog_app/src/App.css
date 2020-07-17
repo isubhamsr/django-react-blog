@@ -109,7 +109,61 @@ main > .container {
   background: #2d2d2d;
 } */
 
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@500&display=swap');
+
 
 /* pre {
-  border-style: double;
+  tab-size: initial;
+  color: rgb(255, 255, 255);
+  background: rgb(37, 37, 37);
+  white-space: pre-wrap;
+  padding: 1em;
+  margin: .5em 0;
+  overflow: auto;
+  overflow-x: auto;
 } */
+
+pre {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  border-left: 3px solid #f36d33;
+  color: #666;
+  page-break-inside: avoid;
+  font-family: 'Inconsolata', monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 1.6em;
+  max-width: 100%;
+  overflow: auto;
+  padding: 1em 1.5em;
+  display: block;
+  word-wrap: break-word;
+}
+
+
+
+code {
+  /* font-family: 'Inconsolata', monospace; */
+  margin: 5px;
+  padding: 1em;
+     margin: .5em 0;
+     overflow: auto;
+}
+
+.load-more{
+
+  display: block;
+  border: 0;
+  margin: 1em auto;
+  padding: .75em 1em;
+  font-size: 1em;
+  background-color: #c34d41;
+  color: #fff;
+  font-weight: 500;
+  text-transform: uppercase;
+  /* font-family: $sans; */
+  cursor: pointer;
+  
+  /* &:focus
+    outline: 1px solid rgba(255, 255, 255, .5); */
+}
