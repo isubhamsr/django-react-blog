@@ -5,6 +5,8 @@ import ArticleDetails from './containers/ArticleDetailsView'
 import CustomForm from './components/CreateUpdateForm'
 import Signup from './components/Signup'
 import Signin from './components/Signin'
+import Search from './components/Search'
+
 
 export default function BaseRoute() {
     return (
@@ -15,6 +17,7 @@ export default function BaseRoute() {
             <Route path="/post/update/:articleId/" component={CustomForm} />
             <Route path="/signup/" component={Signup} />
             <Route path="/signin/" component={Signin} />
+            <Route path="/search/:query/" component={Search} />
         </div>
     )
 }

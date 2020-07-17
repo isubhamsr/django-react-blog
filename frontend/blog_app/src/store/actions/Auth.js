@@ -102,6 +102,49 @@ export const authLogout = () => {
     }
 }
 
+export const startSearch = () =>{
+    return{
+        type: actionTypes.SEARCH_START
+    }
+}
+
+export const searchSuccess = (data) =>{
+    return{
+        type: actionTypes.SEARCH_SUCCESS,
+        data : data
+    }
+}
+
+export const searchFail = (error) => {
+    return {
+        type: actionTypes.AUTH_FAIL,
+        error: error
+    }
+}
+
+export const search = (query) => {
+    return dispatch => {
+        dispatch(authStart());
+        axios.post('http://127.0.0.1:8000/api/search/', {
+            query: query
+        })
+            .then(res => {
+                if (res.data.err === 'true') {
+                    // console.log(res.data.message);
+                    // alert(res.data.message)
+                    dispatch(searchFail(res.data.message))
+                } else {
+                    const data = res.data.data
+                    dispatch(searchSuccess(data))
+                }
+
+            })
+            .catch(error => {
+                dispatch(searchFail(error.message))
+            })
+    }
+}
+
 // export const authCheckState = () => {
 //     return dispatch => {
 //         const token = localStorage.getItem('token');

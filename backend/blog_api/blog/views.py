@@ -40,6 +40,25 @@ def articleDetails(request, slug):
     except Exception as err:
         errMessage = f"Oops! {sys.exc_info()[1]}"
         return JsonResponse({'err':'true', 'message' : errMessage})
+
+@csrf_exempt   
+def search(request):
+    try:
+        payload = json.loads(request.body)
+        print(payload['query'])
+        query = payload['query']
+        search = Article.objects.filter(article_title__icontains=query)
+        # print(list( search.values()))
+        if len(search) == 0:
+            return JsonResponse({'err':'true', 'message':'No Such Article Found'})
+        else:
+            # print(articleDetails.values())
+            search_result = list(search.values())
+            return JsonResponse({'err':'false', 'message':'Article Found', 'data':search_result})
+        return JsonResponse({'err':'false', 'message' : "search done"}) 
+    except Exception as err:
+        errMessage = f"Oops! {sys.exc_info()[1]}"
+        return JsonResponse({'err':'true', 'message' : errMessage})      
     
 @csrf_exempt    
 def addArticle(request):
