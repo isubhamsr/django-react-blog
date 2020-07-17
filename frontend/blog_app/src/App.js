@@ -6,12 +6,22 @@ import { BrowserRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as actions from './store/actions/Auth'
 import BaseRoute from './route';
-
+import {Helmet} from "react-helmet";
+// import Prism from 'prismjs'
+// import 'prismjs/themes/prism-okaidia.css'
+// import 'prismjs/components/prism-handlebars.min.js'
+// import 'prismjs/components/prism-javascript.min.js'
+// // import '../public/prism'
 
 class App extends Component {
-
+  
   componentDidMount(){
+    // Prism.highlightAll();
     this.props.onTryAutoSignin()
+    // this.renderScript()
+    
+    
+    
   }
 
   render() {

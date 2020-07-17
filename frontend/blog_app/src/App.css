@@ -93,6 +93,7 @@
 
 main > .container {
   padding: 80px 15px 0;
+  min-height: 90vh;
 }
 
 .footer {
@@ -104,5 +105,11 @@ main > .container {
   background-color: #c7c3c3;
 } 
 
+/* .myclass{
+  background: #2d2d2d;
+} */
 
 
+/* pre {
+  border-style: double;
+} */

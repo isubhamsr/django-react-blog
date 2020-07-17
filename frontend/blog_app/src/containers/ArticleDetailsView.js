@@ -4,6 +4,7 @@ import Axios from 'axios';
 import { Card } from 'antd';
 import { Spin, Space } from 'antd';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+import parse from 'html-react-parser';
 
 
 export default class ArticleDetails extends Component {
@@ -13,6 +14,7 @@ export default class ArticleDetails extends Component {
     }
 
     componentDidMount() {
+        // Prism.highlightAll();
         const articleId = this.props.match.params.articleId;
 
 
@@ -28,11 +30,24 @@ export default class ArticleDetails extends Component {
                     data.author = item.author,
                     data.created_at = item.created_at
                 ))
-                // console.log("data");
-                // console.log(data);
+                let a = data.created_at
+                let date_time = a.split("T")
+
+                let date = date_time[0].split("-")
+                let year = date[0]
+                let month = date[1]
+                let day = date[2]
+
+                date = `${day}-${month}-${year}`
+                var H = +date_time[1].substr(0, 2);
+                var h = H % 12 || 12;
+                var ampm = (H < 12 || H === 24) ? "AM" : "PM";
+                var timeString = h + date_time[1].substr(2, 3) + ampm;
+
+                data.date = date
+                data.time = timeString
 
                 this.setState({
-                    // article: res.data.data
                     article: data
                 })
             })
@@ -49,23 +64,23 @@ export default class ArticleDetails extends Component {
                 </div>
             )
         } else {
-            const bg = "http://127.0.0.1:8000/media/" + this.state.article.article_image
+            // const bg = "http://127.0.0.1:8000/media/" + this.state.article.article_image
             const html = this.state.article.article_description;
             return (
                 <>
+                    <img src={"http://127.0.0.1:8000/media/" + this.state.article.article_image} class="img-fluid my-4 mx-auto d-block" alt="cover"></img>
+                    <hr class="my-4" />
+                    <div class="blog-post my-4 container">
+                        <h2 class="blog-post-title">{this.state.article.article_title}</h2>
+                        <p class="blog-post-meta">Published On <strong>{this.state.article.date}</strong> at <strong>{this.state.article.time}</strong> by <strong><a href="#">{this.state.article.author}</a></strong></p>
 
-                <img src={"http://127.0.0.1:8000/media/" + this.state.article.article_image} class="img-fluid my-4 mx-auto d-block" alt="cover"></img>
-                <hr class="my-4"/>
-                <div class="blog-post my-4">
-                    <h2 class="blog-post-title">{this.state.article.article_title}</h2>
-                    <p class="blog-post-meta">{this.state.article.created_at} by <a href="#">{this.state.article.author}</a></p>
-
-                    <p>This blog post shows a few different types of content that’s supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                    <hr />
-                    {/* <p>{this.state.article.article_description}</p> */}
-                    <div>{ ReactHtmlParser(html) }</div>
-                    <hr />
-                </div>
+                        <hr />
+                        {/* <p>{this.state.article.article_description}</p> */}
+                        <div className="container">
+                            {ReactHtmlParser(html)}
+                        <hr />
+                        </div>
+                    </div>
                 </>
             )
         }
