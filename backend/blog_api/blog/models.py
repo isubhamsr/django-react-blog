@@ -16,3 +16,13 @@ class Article(models.Model):
 
     def __str__(self):
         return f"{self.article_id} - {self.article_title}"
+
+class Comment(models.Model):
+    comment_id = models.AutoField(primary_key=True)
+    comment = models.TextField()
+    is_active = models.BooleanField(default=1)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.comment_id}"

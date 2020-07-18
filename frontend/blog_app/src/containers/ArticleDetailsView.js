@@ -5,6 +5,7 @@ import { Card } from 'antd';
 import { Spin, Space } from 'antd';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import parse from 'html-react-parser';
+import Comments from '../components/Comments';
 
 
 export default class ArticleDetails extends Component {
@@ -15,10 +16,10 @@ export default class ArticleDetails extends Component {
 
     componentDidMount() {
         // Prism.highlightAll();
-        const articleId = this.props.match.params.articleId;
+        const slug = this.props.match.params.slug;
 
 
-        Axios.get(`http://127.0.0.1:8000/api/post/${articleId}/`)
+        Axios.get(`http://127.0.0.1:8000/api/post/${slug}/`)
             .then((res) => {
                 // console.log(res.data.data);
                 const data = {}
@@ -78,9 +79,14 @@ export default class ArticleDetails extends Component {
                         {/* <p>{this.state.article.article_description}</p> */}
                         <div className="container">
                             {ReactHtmlParser(html)}
-                        <hr />
+                            <hr />
+                        </div>
+                        <div className="container">
+                        <Comments />
                         </div>
                     </div>
+
+                    
                 </>
             )
         }

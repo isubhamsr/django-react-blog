@@ -52,7 +52,7 @@ class Signin extends Component {
         }
         // console.log(this.props.error);
         return (
-            <div>
+            <div className="py-4">
             {errMessage}
                 <Form
                     name="register"

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.serializers import serialize
-from blog.models import Article
+from blog.models import Article, Comment
 from blog.forms import ArticleForm
 from django.forms.models import modelform_factory
 from functools import wraps
@@ -58,8 +58,36 @@ def search(request):
         return JsonResponse({'err':'false', 'message' : "search done"}) 
     except Exception as err:
         errMessage = f"Oops! {sys.exc_info()[1]}"
-        return JsonResponse({'err':'true', 'message' : errMessage})      
+        return JsonResponse({'err':'true', 'message' : errMessage})  
+
+@csrf_exempt
+def addcomment(request):
+    if request.method == 'POST':
+        try:
+            payload = json.loads(request.body)
+            print(payload)
+            comment = Comment(comment=payload["comment"])
+            comment.save()
+            return JsonResponse({'err':'false', 'message' : "Comment added"})
+        except Exception as err:
+            errMessage = f"Oops! {sys.exc_info()[1]}"
+            return JsonResponse({'err':'true', 'message' : errMessage}) 
+
+
+def fetchAllComments(request):
+    try:
+        comments = Comment.objects.all()
+        if len(comments) == 0:
+            return JsonResponse({'err':'true', 'message':'No Comments'})
+        else:
+            data = list(comments.values())
+            return JsonResponse({'err':'false', 'message':'All Commets are Fetched', 'data':data})
+    except Exception as err:
+        errMessage = f"Oops! {sys.exc_info()[1]}"
+        return JsonResponse({'err':'true', 'message' : errMessage})                        
     
+
+
 @csrf_exempt    
 def addArticle(request):
     if request.method == 'POST':

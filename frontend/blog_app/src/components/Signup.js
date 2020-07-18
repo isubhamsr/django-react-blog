@@ -56,7 +56,7 @@ class Singnup extends Component {
         }
         console.log(this.props.error);
         return (
-            <div>
+            <div className="py-4">
             {errMessage}
                 <Form
                     // form={form}

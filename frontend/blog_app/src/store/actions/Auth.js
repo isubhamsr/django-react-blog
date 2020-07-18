@@ -41,7 +41,7 @@ export const authLogin = (username, password) => {
 
                 if (res.data.err === 'true') {
                     // console.log(res.data.message);
-                    // alert(res.data.message)
+                    alert(res.data.message)
                     dispatch(authFail(res.data.message))
                 } else {
                     const token = res.data.data
@@ -75,7 +75,7 @@ export const authSignup = (first_name, last_name, email, username, password, pho
             .then(res => {
                 if (res.data.err === 'true') {
                     // console.log(res.data.message);
-                    // alert(res.data.message)
+                    alert(res.data.message)
                     dispatch(authFail(res.data.message))
                 } else {
                     const token = res.data.data
