@@ -57,7 +57,7 @@ export default class ArticleDetails extends Component {
     render() {
         // console.log("this.state.article");
         // console.log( this.state.article);
-
+        const token = localStorage.getItem("token")
         if (this.state.article === null) {
             return (
                 <div className="example">
@@ -82,7 +82,16 @@ export default class ArticleDetails extends Component {
                             <hr />
                         </div>
                         <div className="container">
-                        <Comments />
+                        {
+                            token !== null ?
+                            <Comments />
+                            :
+                            <div>
+                                <h3>You Need to Sign in for Comment</h3>
+                                <Link to="/signin" class="btn btn-outline-success m-2">Sign In</Link>
+                            </div>
+                        }
+                        
                         </div>
                     </div>
 
