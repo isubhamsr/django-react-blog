@@ -131,10 +131,10 @@ export default class Comments extends Component {
                                             </ul> */}
                                         </div>
                                         <div class="comment_tools">
-                                            <ul>
-                                                <li><i class="fa fa-share-alt"></i></li>
-                                                <li><i class="fa fa-reply"></i></li>
-                                                <li><i class="fa fa-heart love"></i></li>
+                                            <ul className="commentUL">
+                                                <li className="commentLI"><i class="fa fa-share-alt"></i></li>
+                                                <li className="commentLI"><i class="fa fa-reply"></i></li>
+                                                <li className="commentLI"><i class="fa fa-heart love"></i></li>
                                             </ul>
                                         </div>
                                     </div>

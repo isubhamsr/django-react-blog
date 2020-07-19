@@ -310,13 +310,13 @@ code {
           text-align: right;
         }
     
-    ul {
+    .commentUL {
       list-style-type: none;
       padding-left: 75px;
       font-size: 0;
 
     }
-        li {
+        .commentLI {
           display: inline-block;
           padding: 5px;
           font-size: .7rem;

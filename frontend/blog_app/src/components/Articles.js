@@ -10,7 +10,7 @@ export default class Articles extends Component {
 
   loadMore = () => {
     this.setState((prev) => {
-      return { visible: prev.visible + 5 };
+      return { visible: prev.visible + 2 };
     });
   }
 
