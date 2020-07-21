@@ -37,11 +37,13 @@
   }
 } */
 
+
 .site-layout-content {
   background: #fff;
   padding: 24px;
   min-height: 280px;
 }
+
 #components-layout-demo-top .logo {
   width: 120px;
   height: 31px;
@@ -49,3 +51,275 @@
   margin: 16px 24px 16px 0;
   float: left;
 }
+
+.example {
+  text-align: center;
+  /* background: rgba(0, 0, 0, 0.05); */
+  border-radius: 4px;
+  margin-bottom: 20px;
+  padding: 30px 50px;
+  margin: 20px 0;
+}
+
+#components-form-demo-normal-login .login-form {
+  max-width: 300px;
+}
+#components-form-demo-normal-login .login-form-forgot {
+  float: right;
+}
+#components-form-demo-normal-login .ant-col-rtl .login-form-forgot {
+  float: left;
+}
+#components-form-demo-normal-login .login-form-button {
+  width: 100%;
+}
+
+/* layout css */
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+
+main > .container {
+  padding: 80px 15px 0;
+  min-height: 90vh;
+}
+
+.footer {
+  margin-top: auto;
+  bottom: 0;
+  width: 100%;
+  height: 60px; 
+  line-height: 60px; 
+  background-color: #c7c3c3;
+} 
+
+/* .myclass{
+  background: #2d2d2d;
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@500&display=swap');
+
+
+/* pre {
+  tab-size: initial;
+  color: rgb(255, 255, 255);
+  background: rgb(37, 37, 37);
+  white-space: pre-wrap;
+  padding: 1em;
+  margin: .5em 0;
+  overflow: auto;
+  overflow-x: auto;
+} */
+
+pre {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  border-left: 3px solid #f36d33;
+  color: #666;
+  page-break-inside: avoid;
+  font-family: 'Inconsolata', monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 1.6em;
+  max-width: 100%;
+  overflow: auto;
+  padding: 1em 1.5em;
+  display: block;
+  word-wrap: break-word;
+}
+
+
+
+code {
+  /* font-family: 'Inconsolata', monospace; */
+  margin: 5px;
+  padding: 1em;
+     margin: .5em 0;
+     overflow: auto;
+}
+
+.load-more{
+
+  display: block;
+  border: 0;
+  margin: 1em auto;
+  padding: .75em 1em;
+  font-size: 1em;
+  background-color: #c34d41;
+  color: #fff;
+  font-weight: 500;
+  text-transform: uppercase;
+  /* font-family: $sans; */
+  cursor: pointer;
+  
+  /* &:focus
+    outline: 1px solid rgba(255, 255, 255, .5); */
+}
+
+.post-title{
+  display: block;
+  font-size: 1.5em;
+  /* margin-top: 0.83em;
+  margin-bottom: 0.83em; */
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+.name, select, textarea {
+  width: 100%; /* Full width */
+  padding: 12px; /* Some padding */ 
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+.button{
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin:auto;
+  display:block
+}
+
+
+.user_avatar {
+	width: 65px;
+	height: 65px;
+
+	display: inline-block;
+	vertical-align: middle;
+
+}
+    .commentImg {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
+.comment_block {
+	width: 100%;
+	height: 100%;
+
+	margin: 0 auto;
+	padding: 10px;
+
+  }
+  
+  .create_new_comment {
+		width: 100%;
+    padding: 20px 0;
+  }
+
+  .commentText {
+    width: 100%;
+    font-weight: 300;
+    font-size: 1.3rem;
+
+    padding: 10px;
+    margin-left: 10px;
+
+    border: none;
+    border-bottom: 2px solid lighten(GREY, 15%);
+
+  }
+
+  .input_comment {
+    display: inline-block;
+    vertical-align: middle;
+
+    margin-left: 10px;
+    width: calc(100% - 75px);
+  }
+
+	.new_comment {
+		width: 100%;
+		height: auto;
+		padding: 20px 0;
+		border-top: 1px solid lighten(GREY, 10%);
+
+    
+  }
+      .user_comment {
+        list-style-type: none;
+      }
+      .comment_body {
+        display: inline-block;
+        vertical-align: middle;
+  
+        width: calc(100% - 75px);
+        min-height: 65px;
+        margin-left: 10px;
+        padding: 5px 10px;
+        font-size: .9rem;
+        color: #555;
+        background-color: WHITE;
+        border-bottom: 2px solid lighten(GREY, 15%);
+        
+        
+      }
+            .comments {
+              padding: 5px;
+            }
+            .user {
+              color: BLUE;
+              margin-right: 2px;
+            }
+    
+    .replied_to {
+      margin: 5px 0px;
+      background-color: lighten(GREY, 18%);
+      border-bottom: 2px solid lighten(GREY, 15%);
+      border-radius: 5px;
+    }
+
+
+
+		.comment_toolbar {
+			width: 100%; 
+    }
+        .comment_details {
+          display: inline-block;
+          vertical-align: middle;
+          width: 70%;
+          text-align: left;
+        }
+  
+        .comment_tools {
+          display: inline-block;
+          vertical-align: middle;
+          width: 30%;
+          text-align: right;
+        }
+    
+    .commentUL {
+      list-style-type: none;
+      padding-left: 75px;
+      font-size: 0;
+
+    }
+        .commentLI {
+          display: inline-block;
+          padding: 5px;
+          font-size: .7rem;
+          color: lighten(GREY, 5%);
+        }
+
